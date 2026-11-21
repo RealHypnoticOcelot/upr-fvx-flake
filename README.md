@@ -1,6 +1,6 @@
 # Universal Pokemon Randomizer FVX Nix Flake
 
-This flake only supports `x86-64_linux` machines!
+This flake only supports `x86_64-linux` machines!
 
 ## Usage:
 
