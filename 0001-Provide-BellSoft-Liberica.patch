@@ -1,0 +1,14 @@
+diff --git a/random/build.gradle.kts b/random/build.gradle.kts
+index cc15d03f..13f2be85 100644
+--- a/random/build.gradle.kts
++++ b/random/build.gradle.kts
+@@ -103,7 +103,8 @@ PlatformConfig.entries.forEach { cfg ->
+         group = "release setup"
+         // We use BellSoft Liberica because they include jmods in their normal JDK releases.
+         // At the time of writing Adoptium Eclipse Temurin does not, which caused a bunch of Jlink confusion.
+-        src("https://download.bell-sw.com/java/$javaVersion+$jdkVersion/bellsoft-jdk$javaVersion+$jdkVersion-${cfg.apiOS}-${cfg.apiArchitecture}.$extension")
++        val archive = providers.gradleProperty("jmodsArchive").get()
++        src(file(archive).toURI().toString())
+         dest(layout.buildDirectory.file("jmods/compressed/${cfg.name}.$extension"))
+         overwrite(false)
+     }

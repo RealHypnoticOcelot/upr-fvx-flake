@@ -1,0 +1,17 @@
+diff --git a/random/src/main/java/com/uprfvx/random/gui/RandomizerGUI.java b/random/src/main/java/com/uprfvx/random/gui/RandomizerGUI.java
+index 5ffb08ef..e6caadb9 100644
+--- a/random/src/main/java/com/uprfvx/random/gui/RandomizerGUI.java
++++ b/random/src/main/java/com/uprfvx/random/gui/RandomizerGUI.java
+@@ -4199,10 +4199,6 @@ public class RandomizerGUI {
+         // but it was written in earlier versions so it feels safer to just keep it.
+         // Feel free to investigate if you feel like it. Maybe it's entirely redundant.
+         // --voliol 2025-04-27
+-        URL location = RandomizerGUI.class.getProtectionDomain().getCodeSource().getLocation();
+-        String file = location.getFile();
+-        String plusEncoded = file.replaceAll("\\+", "%2b");
+-        File f = new File(java.net.URLDecoder.decode(plusEncoded, StandardCharsets.UTF_8));
+-        RootPath.path = f.getParentFile() + File.separator;
++        RootPath.path = System.getProperty("user.home");
+     }
+ }
+\ No newline at end of file
