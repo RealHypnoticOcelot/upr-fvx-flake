@@ -39,9 +39,10 @@
         desktopItems = [(
           forSupportedPackages.${system}.makeDesktopItem {
             name = packageName;
+            exec = packageName;
+            icon = ./gen5_pokeball.png;
             desktopName = "Universal Pokemon Randomizer FVX";
-            exec= packageName;
-            icon= ./gen5_pokeball.png ;
+            genericName = "Pokémon game randomizer for generations 1-7"
           }
         )];
 
