@@ -42,7 +42,7 @@
             exec = packageName;
             icon = ./gen5_pokeball.png;
             desktopName = "Universal Pokemon Randomizer FVX";
-            genericName = "Pokémon game randomizer for generations 1-7"
+            genericName = "Pokémon game randomizer for generations 1-7";
           }
         )];
 
