@@ -76,6 +76,7 @@
           makeWrapper ${nixpkgs.lib.getExe forSupportedPackages.${system}.jdk25} $out/bin/${packageName} \
             --add-flags "-Xmx4608M -jar $out/bin/UPR-FVX.jar please-use-the-launcher"
           cp random/build/target/Linux_x86/UPR-FVX.jar $out/bin
+          cp -R random/build/target/Linux_x86/data $out/bin
 
           runHook postInstall
         '';
