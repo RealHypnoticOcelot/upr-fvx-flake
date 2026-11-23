@@ -55,11 +55,6 @@
           data = ./deps.json; # To generate a new ./deps.json, run $(nix build .#default.mitmCache.updateScript --print-out-paths)
         };
 
-        patches = [
-          ./0001-Provide-BellSoft-Liberica.patch
-          ./0002-Change-file-picker-starting-directory.patch
-        ];
-
         # this is required for using mitm-cache on Darwin
         __darwinAllowLocalNetworking = true;
 
@@ -69,14 +64,26 @@
           "-PjmodsArchive=${jmodsArchive}"
         ];
 
+        patches = [
+          ./0001-Provide-BellSoft-Liberica.patch
+          ./0002-Change-file-picker-starting-directory.patch
+        ];
+
+        postPatch = ''
+          substituteInPlace random/src/main/java/com/uprfvx/random/customnames/CustomNamesSet.java \
+            --replace-fail '"data/trainer_and_mon_names"' '"${placeholder "out"}/share/${packageName}/data/trainer_and_mon_names"'
+        '';
+
         installPhase = ''
           runHook preInstall
+
+          mkdir -p $out/share/${packageName}
+          cp -R random/build/target/Linux_x86/data $out/share/${packageName}/data
 
           mkdir -p $out/bin
           makeWrapper ${nixpkgs.lib.getExe forSupportedPackages.${system}.jdk25} $out/bin/${packageName} \
             --add-flags "-Xmx4608M -jar $out/bin/UPR-FVX.jar please-use-the-launcher"
           cp random/build/target/Linux_x86/UPR-FVX.jar $out/bin
-          cp -R random/build/target/Linux_x86/data $out/bin
 
           runHook postInstall
         '';
