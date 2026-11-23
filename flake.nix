@@ -1,9 +1,13 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    upr-fvx-repo = {
+      url = "github:upr-fvx/universal-pokemon-randomizer-fvx";
+      flake = false;
+    };
   };
 
-  outputs = { nixpkgs, ... } @ inputs:
+  outputs = { nixpkgs, upr-fvx-repo, ... } @ inputs:
   let
     packageName = "universal-pokemon-randomizer-fvx";
     forSupportedSystems = nixpkgs.lib.genAttrs [
@@ -19,12 +23,6 @@
   {
     packages = forSupportedSystems (system:
       let
-        repo = forSupportedPackages.${system}.fetchFromGitHub {
-          owner = "upr-fvx";
-          repo = "universal-pokemon-randomizer-fvx";
-          rev = "dfa93b749822fe135be7c9d956a564ff5c84f43a";
-          hash = "sha256-+t4LqMr7maK0GjMRSkJgwaeyk+L4bfxCDi5v3lP61lc=";
-        };
         jmodsArchive = forSupportedPackages.${system}.fetchurl {
           url = "https://download.bell-sw.com/java/25.0.2+12/bellsoft-jdk25.0.2+12-linux-amd64.tar.gz";
           hash = "sha256-jcP0RRsK/+AKbU2gqiMxJAv30UKjU/9SlnNQH4vQnEo=";
@@ -34,13 +32,13 @@
       default = forSupportedPackages.${system}.stdenv.mkDerivation (finalAttrs: {
         pname = packageName;
         version = "1.6.3";
-        src = repo;
+        src = upr-fvx-repo;
 
         desktopItems = [(
           forSupportedPackages.${system}.makeDesktopItem {
             name = packageName;
             exec = packageName;
-            icon = ./gen5_pokeball.png;
+            icon = "${upr-fvx-repo}/docs/src/assets/images/gen5_pokeball.png";
             desktopName = "Universal Pokemon Randomizer FVX";
             genericName = "Pokémon game randomizer for generations 1-7";
           }

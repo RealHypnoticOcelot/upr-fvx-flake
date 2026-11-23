@@ -18,7 +18,24 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "upr-fvx-repo": "upr-fvx-repo"
+      }
+    },
+    "upr-fvx-repo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795344321,
+        "narHash": "sha256-+UM/YdbmsRdYC6j8oZV4g+klFsBuTQrYgU+YJazQHrE=",
+        "owner": "upr-fvx",
+        "repo": "universal-pokemon-randomizer-fvx",
+        "rev": "18eaf5e1b00bebd0f178ca4ef4f4bfcc88ba3ce9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "upr-fvx",
+        "repo": "universal-pokemon-randomizer-fvx",
+        "type": "github"
       }
     }
   },
